@@ -1,0 +1,35 @@
+local url = _G.Webhook
+local data = {
+   ["content"] = "@everyone Wake up bro",
+   ["embeds"] = {
+       {
+           ["title"] = "[☀️☁️ UPDATE 17] Blox Fruits",
+           ["description"] = "**👤 Roblox Username: **||" .. game.Players.LocalPlayer.Name.. "||" ..
+           "\n**🍎 Current Fruit :** " .. game.Players.LocalPlayer.Data.DevilFruit.Value.. "" ..
+           "\n**🌐 Level :** " .. game.Players.LocalPlayer.Data.Level.Value.. "" ..
+           "\n**💰 Beli B$ :** " .. game.Players.LocalPlayer.Data.Beli.Value.. "" ..
+           "\n**💷 Fragments :** " .. game.Players.LocalPlayer.Data.Fragments.Value.. "" ,
+           ["type"] = "rich",
+           ["timestamp"] = os.date("%Y-%m-%dT%X.000Z"),
+           ["color"] = tonumber(0x7269da),
+           ["image"] = {
+               ["url"] = "https://media.discordapp.net/attachments/929712455570030672/930665589465284618/343fcd03d8173f8ef35cb096480016c0.png?width=725&height=408"
+           };
+           ["thumbnail"] = {
+                ["url"] = ("https://www.roblox.com/headshot-thumbnail/image?userId=%d&width=420&height=420&format=png"):format(game.Players.LocalPlayer.UserId)
+            };
+       }
+   }
+}
+local newdata = game:GetService("HttpService"):JSONEncode(data)
+
+local headers = {
+   ["content-type"] = "application/json"
+}
+request = http_request or request or HttpPost or syn.request
+local Webhook = {Url = url, Body = newdata, Method = "POST", Headers = headers}
+
+while true do
+request(Webhook)
+wait(300)
+end
